@@ -27,10 +27,10 @@
 
   <text class="row-label" x="24" y="64">Repositories<tspan class="row-dots" id="repo_data_dots"> ........... </tspan><tspan class="row-value" id="repo_data">11</tspan></text>
   <text class="row-label" x="24" y="86">Contributed to<tspan class="row-dots" id="contrib_data_dots"> ........... </tspan><tspan class="row-value" id="contrib_data">11</tspan></text>
-  <text class="row-label" x="24" y="108">Commits (1y)<tspan class="row-dots" id="commit_data_dots"> .......... </tspan><tspan class="row-value" id="commit_data">201</tspan></text>
+  <text class="row-label" x="24" y="108">Commits (1y)<tspan class="row-dots" id="commit_data_dots"> .......... </tspan><tspan class="row-value" id="commit_data">207</tspan></text>
   <text class="row-label" x="24" y="130">Followers<tspan class="row-dots" id="follower_data_dots"> ............ </tspan><tspan class="row-value" id="follower_data">0</tspan></text>
-  <text class="row-label" x="24" y="152">Lines of code<tspan class="row-dots" id="loc_data_dots"> ....... </tspan><tspan class="row-value" id="loc_data">31,251</tspan></text>
-  <text class="sub-label" x="24" y="170">(<tspan class="sub-add">+<tspan id="loc_add">36,083</tspan></tspan> / <tspan class="sub-del">-<tspan id="loc_del">4,832</tspan></tspan>)</text>
+  <text class="row-label" x="24" y="152">Lines of code<tspan class="row-dots" id="loc_data_dots"> ....... </tspan><tspan class="row-value" id="loc_data">31,603</tspan></text>
+  <text class="sub-label" x="24" y="170">(<tspan class="sub-add">+<tspan id="loc_add">36,537</tspan></tspan> / <tspan class="sub-del">-<tspan id="loc_del">4,934</tspan></tspan>)</text>
 
   <text class="footer" x="471" y="182" text-anchor="end">auto-updated daily</text>
 </svg>
