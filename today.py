@@ -5,11 +5,11 @@ import time
 import hashlib
 
 # Fine-grained personal access token with All Repositories access:
-# Account permissions: read:Followers, read:Starring, read:Watching
+# Account permissions: read:Followers
 # Repository permissions: read:Commit statuses, read:Contents, read:Issues, read:Metadata, read:Pull Requests
 HEADERS = {'authorization': 'token ' + os.environ['ACCESS_TOKEN']}
 USER_NAME = os.environ.get('USER_NAME', 'Chain-P')
-QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos_stars': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
+QUERY_COUNT = {'user_getter': 0, 'follower_getter': 0, 'graph_repos': 0, 'recursive_loc': 0, 'graph_commits': 0, 'loc_query': 0}
 
 
 def simple_request(func_name, query, variables):
@@ -45,26 +45,16 @@ def graph_commits(start_date, end_date):
     return int(request.json()['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions'])
 
 
-def graph_repos_stars(count_type, owner_affiliation, cursor=None):
+def graph_repos(owner_affiliation, cursor=None):
     """
-    Uses GitHub's GraphQL v4 API to return total repository or star count.
+    Uses GitHub's GraphQL v4 API to return total repository count.
     """
-    query_count('graph_repos_stars')
+    query_count('graph_repos')
     query = '''
     query ($owner_affiliation: [RepositoryAffiliation], $login: String!, $cursor: String) {
         user(login: $login) {
             repositories(first: 100, after: $cursor, ownerAffiliations: $owner_affiliation) {
                 totalCount
-                edges {
-                    node {
-                        ... on Repository {
-                            nameWithOwner
-                            stargazers {
-                                totalCount
-                            }
-                        }
-                    }
-                }
                 pageInfo {
                     endCursor
                     hasNextPage
@@ -73,11 +63,8 @@ def graph_repos_stars(count_type, owner_affiliation, cursor=None):
         }
     }'''
     variables = {'owner_affiliation': owner_affiliation, 'login': USER_NAME, 'cursor': cursor}
-    request = simple_request(graph_repos_stars.__name__, query, variables)
-    if count_type == 'repos':
-        return request.json()['data']['user']['repositories']['totalCount']
-    elif count_type == 'stars':
-        return stars_counter(request.json()['data']['user']['repositories']['edges'])
+    request = simple_request(graph_repos.__name__, query, variables)
+    return request.json()['data']['user']['repositories']['totalCount']
 
 
 def recursive_loc(owner, repo_name, data, cache_comment, addition_total=0, deletion_total=0, my_commits=0, cursor=None):
@@ -260,24 +247,13 @@ def force_close_file(data, cache_comment):
     print('There was an error while writing to the cache file. The file,', filename, 'has had the partial data saved and closed.')
 
 
-def stars_counter(data):
+def svg_overwrite(filename, commit_data, repo_data, contrib_data, follower_data, loc_data):
     """
-    Count total stars in repositories owned by me
-    """
-    total_stars = 0
-    for node in data:
-        total_stars += node['node']['stargazers']['totalCount']
-    return total_stars
-
-
-def svg_overwrite(filename, commit_data, star_data, repo_data, contrib_data, follower_data, loc_data):
-    """
-    Parse SVG files and update elements with commits, stars, repositories, and lines written
+    Parse SVG files and update elements with commits, repositories, and lines written
     """
     tree = etree.parse(filename)
     root = tree.getroot()
     justify_format(root, 'commit_data', commit_data, 13)
-    justify_format(root, 'star_data', star_data, 13)
     justify_format(root, 'repo_data', repo_data, 13)
     justify_format(root, 'contrib_data', contrib_data, 13)
     justify_format(root, 'follower_data', follower_data, 13)
@@ -400,11 +376,9 @@ if __name__ == '__main__':
 
     commit_data, commit_time = perf_counter(commit_counter, 7)
     formatter('commit counter', commit_time)
-    star_data, star_time = perf_counter(graph_repos_stars, 'stars', ['OWNER'])
-    formatter('star counter', star_time)
-    repo_data, repo_time = perf_counter(graph_repos_stars, 'repos', ['OWNER'])
+    repo_data, repo_time = perf_counter(graph_repos, ['OWNER'])
     formatter('repo counter', repo_time)
-    contrib_data, contrib_time = perf_counter(graph_repos_stars, 'repos', ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
+    contrib_data, contrib_time = perf_counter(graph_repos, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'])
     formatter('contributed repos', contrib_time)
     follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
     formatter('follower counter', follower_time)
@@ -412,8 +386,8 @@ if __name__ == '__main__':
     for index in range(len(total_loc) - 1):
         total_loc[index] = '{:,}'.format(total_loc[index])
 
-    svg_overwrite('dark_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', commit_data, star_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('dark_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('light_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1])
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
     for funct_name, count in QUERY_COUNT.items():
