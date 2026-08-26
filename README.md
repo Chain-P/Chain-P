@@ -44,6 +44,8 @@ Currently sharpening networking/security fundamentals and looking for automation
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-### 📌 Featured Project
+### 📌 Featured Projects
 
 **[discord-cog-bot](https://github.com/Chain-P/discord-cog-bot)** — a modular Discord bot built with `discord.py`, organized around a cog-per-feature architecture with dedicated model/controller modules for its games (Rock Paper Scissors, Hangman, Guess-a-Word) and a background task loop for per-server birthday tracking.
+
+**[homelab](https://github.com/Chain-P/homelab)** — documentation for a small home infrastructure setup: a Raspberry Pi running systemd-managed services (per-service virtualenvs, auto-restart, boots from external SSD) plus a general game server host (Minecraft, Project Zomboid, Terraria). Written to show the ops thinking behind it, not just list software.
