@@ -70,7 +70,7 @@
       <path d="M 32 78 L 32 66 L 44 66 M 247 66 L 259 66 L 259 78 M 259 142 L 259 154 L 247 154 M 44 154 L 32 154 L 32 142" fill="none" stroke="#39ff14" stroke-width="1.6" filter="url(#glowSoft)">
         <animate attributeName="stroke" values="#39ff14;#1affa0;#39ff14;#9dfa1f;#39ff14" keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"/>
       </path>
-      <text class="mono title" x="46" y="84" filter="url(#glowSoft)">&#9700; CPU / COMMITS
+      <text class="mono title" x="46" y="84" filter="url(#glowSoft)">◤ CPU / COMMITS
         <animate attributeName="fill" values="#39ff14;#1affa0;#39ff14;#9dfa1f;#39ff14" keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"/>
       </text>
       <line x1="46" y1="92" x2="245" y2="92" stroke="#39ff14" stroke-opacity="0.5">
@@ -78,7 +78,7 @@
       </line>
     </g>
     <text class="mono row-label" x="46" y="118" fill="#39ff14">Commits (1y)</text>
-    <text class="mono row-value cpu" x="245" y="118" filter="url(#glowText)" id="commit_data">217</text>
+    <text class="mono row-value cpu" x="245" y="118" filter="url(#glowText)" id="commit_data">219</text>
     <text class="mono meter" x="46" y="138"><tspan class="cpu" filter="url(#glowSoft)" id="commit_meter_fill">████████████</tspan><tspan class="cpu" fill-opacity="0.15" id="commit_meter_track">████████████████</tspan></text>
   </g>
 
@@ -89,7 +89,7 @@
       <path d="M 267 78 L 267 66 L 279 66 M 482 66 L 494 66 L 494 78 M 494 142 L 494 154 L 482 154 M 279 154 L 267 154 L 267 142" fill="none" stroke="#00e5ff" stroke-width="1.6" filter="url(#glowSoft)">
         <animate attributeName="stroke" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"/>
       </path>
-      <text class="mono title" x="281" y="84" filter="url(#glowSoft)">&#9700; MEM / REPOS
+      <text class="mono title" x="281" y="84" filter="url(#glowSoft)">◤ MEM / REPOS
         <animate attributeName="fill" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"/>
       </text>
       <line x1="281" y1="92" x2="480" y2="92" stroke="#00e5ff" stroke-opacity="0.5">
@@ -97,11 +97,11 @@
       </line>
     </g>
     <text class="mono row-label" x="281" y="108" fill="#00e5ff">Repositories</text>
-    <text class="mono row-value mem" x="480" y="108" filter="url(#glowText)" id="repo_data">11</text>
-    <text class="mono meter" x="281" y="122"><tspan class="mem" filter="url(#glowSoft)" id="repo_meter_fill">███████████████</tspan><tspan class="mem" fill-opacity="0.15" id="repo_meter_track">█████████████</tspan></text>
+    <text class="mono row-value mem" x="480" y="108" filter="url(#glowText)" id="repo_data">12</text>
+    <text class="mono meter" x="281" y="122"><tspan class="mem" filter="url(#glowSoft)" id="repo_meter_fill">█████████████████</tspan><tspan class="mem" fill-opacity="0.15" id="repo_meter_track">███████████</tspan></text>
     <text class="mono row-label" x="281" y="138" fill="#00e5ff">Contributed to</text>
-    <text class="mono row-value mem" x="480" y="138" filter="url(#glowText)" id="contrib_data">11</text>
-    <text class="mono meter" x="281" y="150"><tspan class="mem" filter="url(#glowSoft)" id="contrib_meter_fill">█████████████████████</tspan><tspan class="mem" fill-opacity="0.15" id="contrib_meter_track">███████</tspan></text>
+    <text class="mono row-value mem" x="480" y="138" filter="url(#glowText)" id="contrib_data">12</text>
+    <text class="mono meter" x="281" y="150"><tspan class="mem" filter="url(#glowSoft)" id="contrib_meter_fill">██████████████████████</tspan><tspan class="mem" fill-opacity="0.15" id="contrib_meter_track">██████</tspan></text>
   </g>
 
   <!-- NET: loc added / removed / net -->
@@ -111,19 +111,19 @@
       <path d="M 32 174 L 32 162 L 44 162 M 247 162 L 259 162 L 259 174 M 259 238 L 259 250 L 247 250 M 44 250 L 32 250 L 32 238" fill="none" stroke="#ff2ec4" stroke-width="1.6" filter="url(#glowSoft)">
         <animate attributeName="stroke" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
       </path>
-      <text class="mono title" x="46" y="180" filter="url(#glowSoft)">&#9700; NET / LOC
+      <text class="mono title" x="46" y="180" filter="url(#glowSoft)">◤ NET / LOC
         <animate attributeName="fill" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
       </text>
       <line x1="46" y1="188" x2="245" y2="188" stroke="#ff2ec4" stroke-opacity="0.5">
         <animate attributeName="stroke" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
       </line>
     </g>
-    <text class="mono row-label" x="46" y="204" fill="#ff2ec4">&#9650; added</text>
-    <text class="mono row-value add" x="245" y="204" filter="url(#glowText)" id="loc_add">36,904</text>
-    <text class="mono row-label" x="46" y="222" fill="#ff2ec4">&#9660; removed</text>
-    <text class="mono row-value del" x="245" y="222" filter="url(#glowText)" id="loc_del">4,985</text>
+    <text class="mono row-label" x="46" y="204" fill="#ff2ec4">▲ added</text>
+    <text class="mono row-value add" x="245" y="204" filter="url(#glowText)" id="loc_add">37,310</text>
+    <text class="mono row-label" x="46" y="222" fill="#ff2ec4">▼ removed</text>
+    <text class="mono row-value del" x="245" y="222" filter="url(#glowText)" id="loc_del">5,067</text>
     <text class="mono row-label" x="46" y="240" fill="#ff2ec4">net total</text>
-    <text class="mono row-value net" x="245" y="240" filter="url(#glowText)" id="loc_data">31,919</text>
+    <text class="mono row-value net" x="245" y="240" filter="url(#glowText)" id="loc_data">32,243</text>
   </g>
 
   <!-- PROC: followers -->
@@ -133,7 +133,7 @@
       <path d="M 267 174 L 267 162 L 279 162 M 482 162 L 494 162 L 494 174 M 494 238 L 494 250 L 482 250 M 279 250 L 267 250 L 267 238" fill="none" stroke="#ffb400" stroke-width="1.6" filter="url(#glowSoft)">
         <animate attributeName="stroke" values="#ffb400;#ffe14d;#ffb400;#ff5a1a;#ffb400" keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"/>
       </path>
-      <text class="mono title" x="281" y="180" filter="url(#glowSoft)">&#9700; PROC / NETWORK
+      <text class="mono title" x="281" y="180" filter="url(#glowSoft)">◤ PROC / NETWORK
         <animate attributeName="fill" values="#ffb400;#ffe14d;#ffb400;#ff5a1a;#ffb400" keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"/>
       </text>
       <line x1="281" y1="188" x2="480" y2="188" stroke="#ffb400" stroke-opacity="0.5">
@@ -145,5 +145,5 @@
     <text class="mono meter" x="281" y="234"><tspan class="proc" filter="url(#glowSoft)" id="follower_meter_fill"></tspan><tspan class="proc" fill-opacity="0.15" id="follower_meter_track">████████████████████████████</tspan></text>
   </g>
 
-  <text class="mono footer" x="495" y="262" text-anchor="end">SYNCED &#183; DAILY</text>
+  <text class="mono footer" x="495" y="262" text-anchor="end">SYNCED · DAILY</text>
 </svg>
