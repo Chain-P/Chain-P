@@ -1,36 +1,149 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" width="495" height="193" viewBox="0 0 495 193" role="img" aria-label="Chain-P GitHub stats, light mode">
+<svg xmlns="http://www.w3.org/2000/svg" width="527" height="282" viewBox="0 0 527 282" role="img" aria-label="Chain-P GitHub stats, light mode, digital HUD">
+  <defs>
+    <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="0.9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowText" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowAmbient" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <pattern id="grid" width="18" height="18" patternUnits="userSpaceOnUse">
+      <path d="M18 0H0V18" fill="none" stroke="#00e5ff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="#000000" fill-opacity="0.3"/>
+    </pattern>
+  </defs>
   <style>
-    .bg { fill: #ffffff; }
-    .panel-border { fill: none; stroke: #d1d9e0; stroke-width: 1; }
-    .chrome { fill: #f6f8fa; }
-    .dot { fill: #d1d9e0; }
-    .prompt { font: 600 12.5px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #59636e; }
-    .prompt-accent { fill: #b45309; }
-    .row-label { font: 400 13px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #1f2328; }
-    .row-dots { font: 400 13px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #d1d9e0; }
-    .row-value { font: 600 13px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #b45309; }
-    .sub-label { font: 400 11.5px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #59636e; }
-    .sub-add { font: 600 11.5px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #1a7f37; }
-    .sub-del { font: 600 11.5px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #cf222e; }
-    .footer { font: 400 10px ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; fill: #8b949e; }
+    .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace; }
+    .hdr-label { font: 600 10px ui-monospace, monospace; letter-spacing: 2px; fill: #00e5ff; }
+    .hdr-status { font: 600 9px ui-monospace, monospace; letter-spacing: 1.5px; fill: #39ff14; fill-opacity: 0.85; }
+    .title { font: 700 9.5px ui-monospace, monospace; letter-spacing: 1.5px; }
+    .row-label { font: 400 11.5px ui-monospace, monospace; fill-opacity: 0.6; }
+    .row-value { font: 700 13px ui-monospace, monospace; text-anchor: end; }
+    .meter { font: 400 11px ui-monospace, monospace; letter-spacing: -0.5px; }
+    .footer { font: 400 9px ui-monospace, monospace; fill: #00e5ff; fill-opacity: 0.4; letter-spacing: 1px; }
+    .cpu { fill: #39ff14; }
+    .mem { fill: #00e5ff; }
+    .net { fill: #ff2ec4; }
+    .proc { fill: #ffb400; }
+    .add { fill: #39ff14; }
+    .del { fill: #ff3b5c; }
   </style>
 
-  <rect class="bg" x="0.5" y="0.5" width="494" height="192" rx="8"/>
-  <rect class="panel-border" x="0.5" y="0.5" width="494" height="192" rx="8"/>
+  <rect x="16" y="16" width="495" height="250" rx="3" fill="#00e5ff" fill-opacity="0.16" filter="url(#glowAmbient)">
+    <animate attributeName="fill-opacity" values="0.14;0.19;0.145;0.17;0.14" keyTimes="0;0.3;0.55;0.8;1" dur="6s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="16" y="16" width="495" height="250" rx="3" fill="#03060a"/>
+  <rect x="16" y="16" width="495" height="250" rx="3" fill="url(#scan)"/>
+  <rect x="16" y="16" width="495" height="250" rx="3" fill="url(#grid)"/>
+  <rect x="16.5" y="16.5" width="494" height="249" rx="3" fill="none" stroke="#00e5ff" stroke-opacity="0.32" stroke-width="1"/>
 
-  <path class="chrome" d="M 0.5 8.5 A 8 8 0 0 1 8.5 0.5 L 486.5 0.5 A 8 8 0 0 1 494.5 8.5 L 494.5 30.5 L 0.5 30.5 Z"/>
-  <circle class="dot" cx="20" cy="15.5" r="4.5"/>
-  <circle class="dot" cx="34" cy="15.5" r="4.5"/>
-  <circle class="dot" cx="48" cy="15.5" r="4.5"/>
-  <text x="247.5" y="19.5" text-anchor="middle" class="prompt">chain-p<tspan class="prompt-accent" xml:space="preserve"> ~ </tspan>stats.sh</text>
+  <!-- header tube -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="1;1;0.3;1;1;0.65;1;1" keyTimes="0;0.38;0.385;0.39;0.75;0.755;0.76;1" dur="18s" repeatCount="indefinite"/>
+    <text class="mono hdr-label" x="32" y="40" filter="url(#glowSoft)">CHAIN-P // SYSTEM.STATS
+      <animate attributeName="fill" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="19s" repeatCount="indefinite"/>
+    </text>
+    <line x1="32" y1="54" x2="495" y2="54" stroke="#00e5ff" stroke-opacity="0.45" stroke-width="1">
+      <animate attributeName="stroke" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="19s" repeatCount="indefinite"/>
+    </line>
+    <line x1="32" y1="56" x2="495" y2="56" stroke="#00e5ff" stroke-opacity="0.2" stroke-width="1">
+      <animate attributeName="stroke" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="19s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  <g>
+    <animate attributeName="opacity" values="1;0.55;1" keyTimes="0;0.5;1" dur="2.4s" repeatCount="indefinite"/>
+    <circle cx="463" cy="36" r="3" fill="#39ff14" filter="url(#glowSoft)"/>
+    <text class="mono hdr-status" x="471" y="40">LIVE</text>
+  </g>
 
-  <text class="row-label" x="24" y="64">Repositories<tspan class="row-dots" id="repo_data_dots"> ........... </tspan><tspan class="row-value" id="repo_data">11</tspan></text>
-  <text class="row-label" x="24" y="86">Contributed to<tspan class="row-dots" id="contrib_data_dots"> ........... </tspan><tspan class="row-value" id="contrib_data">11</tspan></text>
-  <text class="row-label" x="24" y="108">Commits (1y)<tspan class="row-dots" id="commit_data_dots"> .......... </tspan><tspan class="row-value" id="commit_data">217</tspan></text>
-  <text class="row-label" x="24" y="130">Followers<tspan class="row-dots" id="follower_data_dots"> ............ </tspan><tspan class="row-value" id="follower_data">0</tspan></text>
-  <text class="row-label" x="24" y="152">Lines of code<tspan class="row-dots" id="loc_data_dots"> ....... </tspan><tspan class="row-value" id="loc_data">31,919</tspan></text>
-  <text class="sub-label" x="24" y="170">(<tspan class="sub-add">+<tspan id="loc_add">36,904</tspan></tspan> / <tspan class="sub-del">-<tspan id="loc_del">4,985</tspan></tspan>)</text>
+  <!-- CPU: commits -->
+  <g class="cpu">
+    <g opacity="1">
+      <animate attributeName="opacity" values="1;1;0.3;1;1;0.65;1;1" keyTimes="0;0.38;0.385;0.39;0.75;0.755;0.76;1" dur="19.5s" repeatCount="indefinite"/>
+      <path d="M 32 78 L 32 66 L 44 66 M 247 66 L 259 66 L 259 78 M 259 142 L 259 154 L 247 154 M 44 154 L 32 154 L 32 142" fill="none" stroke="#39ff14" stroke-width="1.6" filter="url(#glowSoft)">
+        <animate attributeName="stroke" values="#39ff14;#1affa0;#39ff14;#9dfa1f;#39ff14" keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"/>
+      </path>
+      <text class="mono title" x="46" y="84" filter="url(#glowSoft)">&#9700; CPU / COMMITS
+        <animate attributeName="fill" values="#39ff14;#1affa0;#39ff14;#9dfa1f;#39ff14" keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"/>
+      </text>
+      <line x1="46" y1="92" x2="245" y2="92" stroke="#39ff14" stroke-opacity="0.5">
+        <animate attributeName="stroke" values="#39ff14;#1affa0;#39ff14;#9dfa1f;#39ff14" keyTimes="0;0.25;0.5;0.75;1" dur="23s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    <text class="mono row-label" x="46" y="118" fill="#39ff14">Commits (1y)</text>
+    <text class="mono row-value cpu" x="245" y="118" filter="url(#glowText)" id="commit_data">217</text>
+    <text class="mono meter" x="46" y="138"><tspan class="cpu" filter="url(#glowSoft)" id="commit_meter_fill">████████████</tspan><tspan class="cpu" fill-opacity="0.15" id="commit_meter_track">████████████████</tspan></text>
+  </g>
 
-  <text class="footer" x="471" y="182" text-anchor="end">auto-updated daily</text>
+  <!-- MEM: repos + contributed -->
+  <g class="mem">
+    <g opacity="1">
+      <animate attributeName="opacity" values="1;1;0.3;1;1;0.65;1;1" keyTimes="0;0.38;0.385;0.39;0.75;0.755;0.76;1" dur="16.8s" repeatCount="indefinite"/>
+      <path d="M 267 78 L 267 66 L 279 66 M 482 66 L 494 66 L 494 78 M 494 142 L 494 154 L 482 154 M 279 154 L 267 154 L 267 142" fill="none" stroke="#00e5ff" stroke-width="1.6" filter="url(#glowSoft)">
+        <animate attributeName="stroke" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"/>
+      </path>
+      <text class="mono title" x="281" y="84" filter="url(#glowSoft)">&#9700; MEM / REPOS
+        <animate attributeName="fill" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"/>
+      </text>
+      <line x1="281" y1="92" x2="480" y2="92" stroke="#00e5ff" stroke-opacity="0.5">
+        <animate attributeName="stroke" values="#00e5ff;#3f7bff;#00e5ff;#00ffb0;#00e5ff" keyTimes="0;0.25;0.5;0.75;1" dur="17s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    <text class="mono row-label" x="281" y="108" fill="#00e5ff">Repositories</text>
+    <text class="mono row-value mem" x="480" y="108" filter="url(#glowText)" id="repo_data">11</text>
+    <text class="mono meter" x="281" y="122"><tspan class="mem" filter="url(#glowSoft)" id="repo_meter_fill">███████████████</tspan><tspan class="mem" fill-opacity="0.15" id="repo_meter_track">█████████████</tspan></text>
+    <text class="mono row-label" x="281" y="138" fill="#00e5ff">Contributed to</text>
+    <text class="mono row-value mem" x="480" y="138" filter="url(#glowText)" id="contrib_data">11</text>
+    <text class="mono meter" x="281" y="150"><tspan class="mem" filter="url(#glowSoft)" id="contrib_meter_fill">█████████████████████</tspan><tspan class="mem" fill-opacity="0.15" id="contrib_meter_track">███████</tspan></text>
+  </g>
+
+  <!-- NET: loc added / removed / net -->
+  <g class="net">
+    <g opacity="1">
+      <animate attributeName="opacity" values="1;1;0.3;1;1;0.65;1;1" keyTimes="0;0.38;0.385;0.39;0.75;0.755;0.76;1" dur="21.4s" repeatCount="indefinite"/>
+      <path d="M 32 174 L 32 162 L 44 162 M 247 162 L 259 162 L 259 174 M 259 238 L 259 250 L 247 250 M 44 250 L 32 250 L 32 238" fill="none" stroke="#ff2ec4" stroke-width="1.6" filter="url(#glowSoft)">
+        <animate attributeName="stroke" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
+      </path>
+      <text class="mono title" x="46" y="180" filter="url(#glowSoft)">&#9700; NET / LOC
+        <animate attributeName="fill" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
+      </text>
+      <line x1="46" y1="188" x2="245" y2="188" stroke="#ff2ec4" stroke-opacity="0.5">
+        <animate attributeName="stroke" values="#ff2ec4;#b23bff;#ff2ec4;#ff4d6d;#ff2ec4" keyTimes="0;0.25;0.5;0.75;1" dur="26s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    <text class="mono row-label" x="46" y="204" fill="#ff2ec4">&#9650; added</text>
+    <text class="mono row-value add" x="245" y="204" filter="url(#glowText)" id="loc_add">36,904</text>
+    <text class="mono row-label" x="46" y="222" fill="#ff2ec4">&#9660; removed</text>
+    <text class="mono row-value del" x="245" y="222" filter="url(#glowText)" id="loc_del">4,985</text>
+    <text class="mono row-label" x="46" y="240" fill="#ff2ec4">net total</text>
+    <text class="mono row-value net" x="245" y="240" filter="url(#glowText)" id="loc_data">31,919</text>
+  </g>
+
+  <!-- PROC: followers -->
+  <g class="proc">
+    <g opacity="1">
+      <animate attributeName="opacity" values="1;1;0.3;1;1;0.65;1;1" keyTimes="0;0.38;0.385;0.39;0.75;0.755;0.76;1" dur="17.9s" repeatCount="indefinite"/>
+      <path d="M 267 174 L 267 162 L 279 162 M 482 162 L 494 162 L 494 174 M 494 238 L 494 250 L 482 250 M 279 250 L 267 250 L 267 238" fill="none" stroke="#ffb400" stroke-width="1.6" filter="url(#glowSoft)">
+        <animate attributeName="stroke" values="#ffb400;#ffe14d;#ffb400;#ff5a1a;#ffb400" keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"/>
+      </path>
+      <text class="mono title" x="281" y="180" filter="url(#glowSoft)">&#9700; PROC / NETWORK
+        <animate attributeName="fill" values="#ffb400;#ffe14d;#ffb400;#ff5a1a;#ffb400" keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"/>
+      </text>
+      <line x1="281" y1="188" x2="480" y2="188" stroke="#ffb400" stroke-opacity="0.5">
+        <animate attributeName="stroke" values="#ffb400;#ffe14d;#ffb400;#ff5a1a;#ffb400" keyTimes="0;0.25;0.5;0.75;1" dur="21s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    <text class="mono row-label" x="281" y="214" fill="#ffb400">Followers</text>
+    <text class="mono row-value proc" x="480" y="214" filter="url(#glowText)" id="follower_data">0</text>
+    <text class="mono meter" x="281" y="234"><tspan class="proc" filter="url(#glowSoft)" id="follower_meter_fill"></tspan><tspan class="proc" fill-opacity="0.15" id="follower_meter_track">████████████████████████████</tspan></text>
+  </g>
+
+  <text class="mono footer" x="495" y="262" text-anchor="end">SYNCED &#183; DAILY</text>
 </svg>

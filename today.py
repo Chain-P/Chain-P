@@ -247,37 +247,39 @@ def force_close_file(data, cache_comment):
     print('There was an error while writing to the cache file. The file,', filename, 'has had the partial data saved and closed.')
 
 
-def svg_overwrite(filename, commit_data, repo_data, contrib_data, follower_data, loc_data):
+def meter_bar(value, cap, length=28):
     """
-    Parse SVG files and update elements with commits, repositories, and lines written
+    Returns (filled, track) block-character strings for a HUD meter bar,
+    representing value/cap clamped to [0, length]
+    """
+    pct = min(1.0, value / cap) if cap else 0.0
+    filled = round(pct * length)
+    return '█' * filled, '█' * (length - filled)
+
+
+def svg_overwrite(filename, commit_data, repo_data, contrib_data, follower_data, loc_data, meters):
+    """
+    Parse SVG files and update elements with commits, repositories, lines written, and meter bars
     """
     tree = etree.parse(filename)
     root = tree.getroot()
-    justify_format(root, 'commit_data', commit_data, 13)
-    justify_format(root, 'repo_data', repo_data, 13)
-    justify_format(root, 'contrib_data', contrib_data, 13)
-    justify_format(root, 'follower_data', follower_data, 13)
-    justify_format(root, 'loc_data', loc_data[2], 13)
-    justify_format(root, 'loc_add', loc_data[0])
-    justify_format(root, 'loc_del', loc_data[1], 7)
+    find_and_replace(root, 'commit_data', fmt(commit_data))
+    find_and_replace(root, 'repo_data', fmt(repo_data))
+    find_and_replace(root, 'contrib_data', fmt(contrib_data))
+    find_and_replace(root, 'follower_data', fmt(follower_data))
+    find_and_replace(root, 'loc_data', fmt(loc_data[2]))
+    find_and_replace(root, 'loc_add', fmt(loc_data[0]))
+    find_and_replace(root, 'loc_del', fmt(loc_data[1]))
+    for element_id, text in meters.items():
+        find_and_replace(root, element_id, text)
     tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
-def justify_format(root, element_id, new_text, length=0):
+def fmt(value):
     """
-    Updates the text of the element, and adjusts the dot-fill of the previous element to justify it on the svg
+    Formats an int with thousands separators; passes strings through unchanged
     """
-    if isinstance(new_text, int):
-        new_text = f"{'{:,}'.format(new_text)}"
-    new_text = str(new_text)
-    find_and_replace(root, element_id, new_text)
-    just_len = max(0, length - len(new_text))
-    if just_len <= 2:
-        dot_map = {0: '', 1: ' ', 2: '. '}
-        dot_string = dot_map[just_len]
-    else:
-        dot_string = ' ' + ('.' * just_len) + ' '
-    find_and_replace(root, f"{element_id}_dots", dot_string)
+    return f"{value:,}" if isinstance(value, int) else str(value)
 
 
 def find_and_replace(root, element_id, new_text):
@@ -383,11 +385,22 @@ if __name__ == '__main__':
     follower_data, follower_time = perf_counter(follower_getter, USER_NAME)
     formatter('follower counter', follower_time)
 
+    commit_fill, commit_track = meter_bar(commit_data, 500)
+    repo_fill, repo_track = meter_bar(repo_data, 20)
+    contrib_fill, contrib_track = meter_bar(contrib_data, 15)
+    follower_fill, follower_track = meter_bar(follower_data, 20)
+    meters = {
+        'commit_meter_fill': commit_fill, 'commit_meter_track': commit_track,
+        'repo_meter_fill': repo_fill, 'repo_meter_track': repo_track,
+        'contrib_meter_fill': contrib_fill, 'contrib_meter_track': contrib_track,
+        'follower_meter_fill': follower_fill, 'follower_meter_track': follower_track,
+    }
+
     for index in range(len(total_loc) - 1):
         total_loc[index] = '{:,}'.format(total_loc[index])
 
-    svg_overwrite('dark_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1])
-    svg_overwrite('light_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1])
+    svg_overwrite('dark_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1], meters)
+    svg_overwrite('light_mode.svg', commit_data, repo_data, contrib_data, follower_data, total_loc[:-1], meters)
 
     print('Total GitHub GraphQL API calls:', '{:>3}'.format(sum(QUERY_COUNT.values())))
     for funct_name, count in QUERY_COUNT.items():
