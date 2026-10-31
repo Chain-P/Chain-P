@@ -78,8 +78,8 @@
       </line>
     </g>
     <text class="mono row-label" x="46" y="118" fill="#39ff14">Commits (1y)</text>
-    <text class="mono row-value cpu" x="245" y="118" filter="url(#glowText)" id="commit_data">356</text>
-    <text class="mono meter" x="46" y="138"><tspan class="cpu" filter="url(#glowSoft)" id="commit_meter_fill">████████████████████</tspan><tspan class="cpu" fill-opacity="0.15" id="commit_meter_track">████████</tspan></text>
+    <text class="mono row-value cpu" x="245" y="118" filter="url(#glowText)" id="commit_data">390</text>
+    <text class="mono meter" x="46" y="138"><tspan class="cpu" filter="url(#glowSoft)" id="commit_meter_fill">██████████████████████</tspan><tspan class="cpu" fill-opacity="0.15" id="commit_meter_track">██████</tspan></text>
   </g>
 
   <!-- MEM: repos + contributed -->
@@ -119,11 +119,11 @@
       </line>
     </g>
     <text class="mono row-label" x="46" y="204" fill="#ff2ec4">▲ added</text>
-    <text class="mono row-value add" x="245" y="204" filter="url(#glowText)" id="loc_add">64,775</text>
+    <text class="mono row-value add" x="245" y="204" filter="url(#glowText)" id="loc_add">69,212</text>
     <text class="mono row-label" x="46" y="222" fill="#ff2ec4">▼ removed</text>
-    <text class="mono row-value del" x="245" y="222" filter="url(#glowText)" id="loc_del">8,600</text>
+    <text class="mono row-value del" x="245" y="222" filter="url(#glowText)" id="loc_del">8,969</text>
     <text class="mono row-label" x="46" y="240" fill="#ff2ec4">net total</text>
-    <text class="mono row-value net" x="245" y="240" filter="url(#glowText)" id="loc_data">56,175</text>
+    <text class="mono row-value net" x="245" y="240" filter="url(#glowText)" id="loc_data">60,243</text>
   </g>
 
   <!-- PROC: followers -->
